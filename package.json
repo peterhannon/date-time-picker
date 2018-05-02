@@ -1,7 +1,7 @@
 {
-  "name": "ng-pick-datetime",
-  "version": "5.2.6",
-  "description": "Angular Date Time Picker",
+  "name": "ng4-pick-datetime",
+  "version": "1.0.0",
+  "description": "Angular 4 Date Time Picker",
   "keywords": [
     "Angular",
     "datepicker",
@@ -9,11 +9,11 @@
     "timepicker",
     "time picker"
   ],
-  "author": "daniel pan <myron.yk.pan@gmail.com>",
+  "author": "Peter Hannon <peter.f.hannon@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DanielYKPan/date-time-picker.git"
+    "url": "https://github.com/peterhannon/date-time-picker.git"
   },
   "jsnext:main": "picker.js",
   "module": "picker.js",
