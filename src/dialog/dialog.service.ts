@@ -14,10 +14,30 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { defer } from 'rxjs/observable/defer';
 import { startWith } from 'rxjs/operators';
-import { Overlay, OverlayConfig, OverlayContainer, OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
-import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
+import { Overlay, OverlayState, OverlayContainer, OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
+import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 
 export const OWL_DIALOG_DATA = new InjectionToken<any>('OwlDialogData');
+
+/**
+ * Custom injector to be used when providing custom
+ * injection tokens to components inside a portal.
+ * @docs-private
+ */
+export class PortalInjector implements Injector {
+    constructor( private parentInjector: Injector,
+                 private customTokens: WeakMap<any, any> ) {
+    }
+    get( token: any, notFoundValue?: any ): any {
+        const value = this.customTokens.get(token);
+
+        if (typeof value !== 'undefined') {
+            return value;
+        }
+
+        return this.parentInjector.get<any>(token, notFoundValue);
+    }
+}
 
 /**
  * Injection token that determines the scroll handling while the dialog is open.
@@ -185,8 +205,8 @@ export class OwlDialogService {
         return containerRef.instance;
     }
 
-    private getOverlayConfig( dialogConfig: OwlDialogConfig ): OverlayConfig {
-        const state = new OverlayConfig({
+    private getOverlayConfig( dialogConfig: OwlDialogConfig ): OverlayState {
+        const state = new OverlayState({
             positionStrategy: this.overlay.position().global(),
             scrollStrategy: dialogConfig.scrollStrategy || this.scrollStrategy(),
             panelClass: dialogConfig.paneClass,

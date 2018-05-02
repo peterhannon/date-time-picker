@@ -12,8 +12,7 @@ export default {
     '@angular/common',
     '@angular/forms',
     '@angular/animations',
-    '@angular/cdk',
-    'moment/moment',
+    '@angular/cdk'
   ],
   onwarn: (warning) => {
     const skip_codes = [

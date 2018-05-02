@@ -1,1 +1,5 @@
-<ng-template cdkPortalOutlet></ng-template>
+<div [ngClass]="'owl-overlay-dialog-container'"
+     [class]="config.paneClass"
+     [ngStyle]="config.paneStyle">
+    <ng-template owlPortalHost></ng-template>
+</div>

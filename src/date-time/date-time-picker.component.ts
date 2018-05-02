@@ -23,7 +23,7 @@ import { DOCUMENT } from '@angular/common';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
     Overlay,
-    OverlayConfig,
+    OverlayState,
     OverlayRef,
     PositionStrategy,
     BlockScrollStrategy,
@@ -434,8 +434,7 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T> implements OnInit, O
 
         merge(
             this.popupRef.backdropClick(),
-            this.popupRef.detachments(),
-            this.popupRef.keydownEvents().pipe(filter(event => event.keyCode === ESCAPE))
+            this.popupRef.detachments()
         ).subscribe(() => this.close());
 
         // Listen to picker's container animation state
@@ -451,7 +450,7 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T> implements OnInit, O
     }
 
     private createPopup(): void {
-        const overlayConfig = new OverlayConfig({
+        const overlayConfig = new OverlayState({
             positionStrategy: this.createPopupPositionStrategy(),
             hasBackdrop: true,
             backdropClass: 'cdk-overlay-transparent-backdrop',
@@ -475,31 +474,7 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T> implements OnInit, O
             )
             .withFallbackPosition(
                 {originX: 'start', originY: 'top'},
-                {overlayX: 'start', overlayY: 'bottom'},
-                undefined,
-                fallbackOffset
-            )
-            .withFallbackPosition(
-                {originX: 'end', originY: 'bottom'},
-                {overlayX: 'end', overlayY: 'top'}
-            )
-            .withFallbackPosition(
-                {originX: 'end', originY: 'top'},
-                {overlayX: 'end', overlayY: 'bottom'},
-                undefined,
-                fallbackOffset
-            )
-            .withFallbackPosition(
-                {originX: 'start', originY: 'top'},
-                {overlayX: 'start', overlayY: 'bottom'},
-                undefined,
-                181
-            )
-            .withFallbackPosition(
-                {originX: 'start', originY: 'top'},
-                {overlayX: 'start', overlayY: 'bottom'},
-                undefined,
-                362
+                {overlayX: 'start', overlayY: 'bottom'}
             );
     }
 

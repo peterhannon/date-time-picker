@@ -61,18 +61,6 @@ export class OwlDialogRef<T> {
                 this._afterClosed$.complete();
                 this.componentInstance = null!;
             });
-
-        this.overlayRef.keydownEvents()
-            .pipe(filter(event => event.keyCode === ESCAPE && !this.disableClose))
-            .subscribe(() => this.close());
-
-        if (location) {
-            this.locationChanged = location.subscribe(() => {
-                if (this.container.config.closeOnNavigation) {
-                    this.close();
-                }
-            });
-        }
     }
 
     public close( dialogResult?: any ) {
@@ -97,13 +85,6 @@ export class OwlDialogRef<T> {
      */
     public backdropClick(): Observable<any> {
         return this.overlayRef.backdropClick();
-    }
-
-    /**
-     * Gets an observable that emits when keydown events are targeted on the overlay.
-     */
-    public keydownEvents(): Observable<KeyboardEvent> {
-        return this.overlayRef.keydownEvents();
     }
 
     /**
@@ -159,6 +140,6 @@ export class OwlDialogRef<T> {
 
     /** Fetches the position strategy object from the overlay ref. */
     private getPositionStrategy(): GlobalPositionStrategy {
-        return this.overlayRef.getConfig().positionStrategy as GlobalPositionStrategy;
+        return this.overlayRef.getState().positionStrategy as GlobalPositionStrategy;
     }
 }

@@ -4,14 +4,14 @@
 
 import {
     ChangeDetectorRef, Component, ComponentRef, EmbeddedViewRef, EventEmitter, OnInit, Optional,
-    ViewChild, Inject, ElementRef, HostBinding, HostListener
+    ViewChild, Inject, ElementRef, HostBinding, HostListener, forwardRef
 } from '@angular/core';
 import {
     animate, AnimationEvent, query, style, transition, trigger, keyframes, animateChild, group
 } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
 import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
-import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
+import { BasePortalHost, ComponentPortal, TemplatePortal, PortalHostDirective } from '@angular/cdk/portal';
 import { OwlDialogConfig } from './dialog-config.class';
 
 const zoomFadeIn = {opacity: 0, transform: 'translateX({{ x }}) translateY({{ y }}) scale({{scale}})'};
@@ -45,9 +45,9 @@ const zoomFadeInFrom = {
     ]
 })
 
-export class OwlDialogContainerComponent extends BasePortalOutlet implements OnInit {
+export class OwlDialogContainerComponent extends BasePortalHost implements OnInit {
 
-    @ViewChild(CdkPortalOutlet) portalOutlet: CdkPortalOutlet;
+    @ViewChild(forwardRef(function(){return PortalHostDirective})) portalHost: PortalHostDirective;
 
     /** The class that traps and manages focus within the dialog. */
     private focusTrap: FocusTrap;
@@ -130,12 +130,12 @@ export class OwlDialogContainerComponent extends BasePortalOutlet implements OnI
      * @param portal Portal to be attached as the dialog content.
      */
     public attachComponentPortal<T>( portal: ComponentPortal<T> ): ComponentRef<T> {
-        if (this.portalOutlet.hasAttached()) {
+        if (this.portalHost.hasAttached()) {
             throw Error('Attempting to attach dialog content after content is already attached');
         }
 
         this.savePreviouslyFocusedElement();
-        return this.portalOutlet.attachComponentPortal(portal);
+        return this.portalHost.attachComponentPortal(portal);
     }
 
     public attachTemplatePortal<C>( portal: TemplatePortal<C> ): EmbeddedViewRef<C> {
