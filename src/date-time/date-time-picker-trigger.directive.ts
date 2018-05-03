@@ -58,8 +58,6 @@ export class OwlDateTimeTriggerDirective<T> implements OnInit, OnChanges, AfterC
 
     @HostListener('click', ['$event'])
     public handleClickOnHost( event: Event ): void {
-        debugger;
-
         if (this.dtPicker) {
             this.dtPicker.open();
             event.stopPropagation();

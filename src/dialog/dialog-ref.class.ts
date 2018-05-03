@@ -38,13 +38,11 @@ export class OwlDialogRef<T> {
                  location?: Location ) {
 
         this.container.animationStateChanged.asObservable().filter(( event: AnimationEvent ) => event.phaseName === 'done' && event.toState === 'enter').take(1).subscribe(() => {
-            debugger;
                 this._afterOpen$.next();
                 this._afterOpen$.complete();
             });
 
         this.container.animationStateChanged.asObservable().filter(( event: AnimationEvent ) => event.phaseName === 'done' && event.toState === 'exit').take(1).subscribe(() => {
-            debugger;
                 this.overlayRef.dispose();
                 this.locationChanged.unsubscribe();
                 this._afterClosed$.next(this.result);
@@ -57,7 +55,6 @@ export class OwlDialogRef<T> {
         this.result = dialogResult;
 
         this.container.animationStateChanged.asObservable().filter(( event: AnimationEvent ) => event.phaseName === 'start').take(1).subscribe(() => {
-            debugger;
                 this._beforeClose$.next(dialogResult);
                 this._beforeClose$.complete();
                 this.overlayRef.detachBackdrop();
@@ -79,8 +76,6 @@ export class OwlDialogRef<T> {
      */
     public updatePosition( position?: DialogPosition ): this {
         let strategy = this.getPositionStrategy();
-
-        debugger;
 
         if (position && (position.left || position.right)) {
             position.left ? strategy.left(position.left) : strategy.right(position.right);

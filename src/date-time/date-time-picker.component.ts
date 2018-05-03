@@ -464,9 +464,7 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T> implements OnInit, O
      * */
     private createPopupPositionStrategy(): PositionStrategy {
         const fallbackOffset = 0;
-
-        debugger;
-
+        
         return this.overlay.position()
             .connectedTo(this._dtInput.elementRef,
                 {originX: 'start', originY: 'bottom'},
