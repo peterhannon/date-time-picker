@@ -1,6 +1,6 @@
 {
   "name": "ng4-pick-datetime",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Angular 4 Date Time Picker",
   "keywords": [
     "Angular",
@@ -31,7 +31,7 @@
     "@angular/platform-browser": "^4.4.5",
     "@angular/platform-browser-dynamic": "^4.4.5",
     "@angular/router": "^4.4.5",
-    "rxjs": "5.5.2",
+    "rxjs": "5.1.0",
     "@angular/cdk": "github:angular/cdk-builds#aa8f6bbef1e643f65198c143c2a42f4405e3644c"
   },
   "devDependencies": {

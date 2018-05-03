@@ -209,6 +209,7 @@ export class OwlYearViewComponent<T> implements OnInit, AfterContentInit, OnDest
      * @return {void}
      * */
     public monthSelected( month: number ): void {
+        
         const firstDateOfMonth = this.dateTimeAdapter.createDate(
             this.dateTimeAdapter.getYear(this.pickerMoment),
             month,

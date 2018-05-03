@@ -211,6 +211,7 @@ export class OwlMultiYearViewComponent<T> implements OnInit, AfterContentInit {
     }
 
     public yearSelected( year: number ): void {
+        
         const firstDateOfMonth = this.dateTimeAdapter.createDate(
             year,
             this.dateTimeAdapter.getMonth(this.pickerMoment),

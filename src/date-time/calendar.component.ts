@@ -19,7 +19,7 @@ import { OwlDateTimeIntl } from './date-time-picker-intl.service';
 import { DateTimeAdapter } from './adapter/date-time-adapter.class';
 import { OWL_DATE_TIME_FORMATS, OwlDateTimeFormats } from './adapter/date-time-format.class';
 import { SelectMode } from './date-time.class';
-import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'owl-date-time-calendar',
@@ -311,7 +311,7 @@ export class OwlCalendarComponent<T> implements OnInit, AfterContentInit {
      * */
     public focusActiveCell() {
         this.ngZone.runOutsideAngular(() => {
-            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
+            this.ngZone.onStable.asObservable().take(1).subscribe(() => {
                 this.elmRef.nativeElement.querySelector('.owl-dt-calendar-cell-active').focus();
             });
         });

@@ -13,7 +13,6 @@ import { extendObject } from '../utils';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { defer } from 'rxjs/observable/defer';
-import { startWith } from 'rxjs/operators';
 import { Overlay, OverlayState, OverlayContainer, OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 
@@ -92,7 +91,7 @@ export class OwlDialogService {
      */
     afterAllClosed: Observable<void> = defer<void>(() => this._openDialogsAtThisLevel.length ?
         this._afterAllClosed :
-        this._afterAllClosed.pipe(startWith(undefined)));
+        this._afterAllClosed.startWith(undefined));
 
     constructor( private overlay: Overlay,
                  private injector: Injector,

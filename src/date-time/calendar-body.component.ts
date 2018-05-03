@@ -7,7 +7,7 @@ import {
     Output
 } from '@angular/core';
 import { SelectMode } from './date-time.class';
-import { take } from 'rxjs/operators';
+import {Observable} from "rxjs";
 
 export class CalendarCell {
     constructor( public value: number,
@@ -177,7 +177,7 @@ export class OwlCalendarBodyComponent implements OnInit {
      * */
     public focusActiveCell(): void {
         this.ngZone.runOutsideAngular(() => {
-            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
+            this.ngZone.onStable.asObservable().take(1).subscribe(() => {
                 this.elmRef.nativeElement.querySelector('.owl-dt-calendar-cell-active').focus();
             });
         });

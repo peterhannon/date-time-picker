@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { OwlDateTimeIntl } from './date-time-picker-intl.service';
 import { DateTimeAdapter } from './adapter/date-time-adapter.class';
-import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
     exportAs: 'owlDateTimeTimer',
@@ -187,7 +187,7 @@ export class OwlTimerComponent<T> implements OnInit {
      * */
     public focus() {
         this.ngZone.runOutsideAngular(() => {
-            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
+            this.ngZone.onStable.asObservable().take(1).subscribe(() => {
                 this.elmRef.nativeElement.focus();
             });
         });

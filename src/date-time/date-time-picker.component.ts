@@ -38,9 +38,7 @@ import { OWL_DATE_TIME_FORMATS, OwlDateTimeFormats } from './adapter/date-time-f
 import { OwlDateTime, PickerMode, PickerType, SelectMode } from './date-time.class';
 import { OwlDialogRef, OwlDialogService } from '../dialog';
 import { Subscription } from 'rxjs/Subscription';
-import { merge } from 'rxjs/observable/merge';
-import { filter } from 'rxjs/operators/filter';
-import { take } from 'rxjs/operators/take';
+import { Observable } from "rxjs";
 
 /** Injection token that determines the scroll handling while the dtPicker is open. */
 export const OWL_DTPICKER_SCROLL_STRATEGY =
@@ -427,12 +425,12 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T> implements OnInit, O
             this.pickerContainer.showPickerViaAnimation();
 
             // Update the position once the calendar has rendered.
-            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
+            this.ngZone.onStable.asObservable().take(1).subscribe(() => {
                 this.popupRef.updatePosition();
             });
         }
 
-        merge(
+        Observable.merge(
             this.popupRef.backdropClick(),
             this.popupRef.detachments()
         ).subscribe(() => this.close());
@@ -467,6 +465,8 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T> implements OnInit, O
     private createPopupPositionStrategy(): PositionStrategy {
         const fallbackOffset = 0;
 
+        debugger;
+
         return this.overlay.position()
             .connectedTo(this._dtInput.elementRef,
                 {originX: 'start', originY: 'bottom'},
@@ -475,6 +475,10 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T> implements OnInit, O
             .withFallbackPosition(
                 {originX: 'start', originY: 'top'},
                 {overlayX: 'start', overlayY: 'bottom'}
+            )
+            .withFallbackPosition(
+                {originX: 'start', originY: 'center'},
+                {overlayX: 'start', overlayY: 'center'}
             );
     }
 

@@ -21,6 +21,8 @@ const zoomFadeInFrom = {
     transformOrigin: '{{ ox }} {{ oy }}'
 };
 
+export function getPortalHostDirective():any{return PortalHostDirective};
+
 @Component({
     selector: 'owl-dialog-container',
     templateUrl: './dialog-container.component.html',
@@ -44,10 +46,9 @@ const zoomFadeInFrom = {
         ])
     ]
 })
-
 export class OwlDialogContainerComponent extends BasePortalHost implements OnInit {
 
-    @ViewChild(forwardRef(function(){return PortalHostDirective})) portalHost: PortalHostDirective;
+    @ViewChild(forwardRef(getPortalHostDirective())) portalHost: PortalHostDirective;
 
     /** The class that traps and manages focus within the dialog. */
     private focusTrap: FocusTrap;
