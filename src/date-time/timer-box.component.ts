@@ -32,11 +32,7 @@ export class OwlTimerBoxComponent implements OnInit, OnDestroy {
 
     @Input() upBtnAriaLabel: string;
 
-    @Input() upBtnDisabled: boolean;
-
     @Input() downBtnAriaLabel: string;
-
-    @Input() downBtnDisabled: boolean;
 
     /**
      * Value would be displayed in the box
@@ -100,6 +96,17 @@ export class OwlTimerBoxComponent implements OnInit, OnDestroy {
     }
 
     private updateValue( value: number ): void {
+
+        console.log(value);
+
+        if(value < this.min) {
+            value = (this.max + 1) + value;
+        }
+
+        if(value > this.max) {
+            value = value - (this.max + 1);
+        }
+
         if (value > this.max || value < this.min) {
             return;
         }

@@ -208,7 +208,8 @@ export class OwlTimerComponent<T> implements OnInit {
         this.setHourValue(hours);
     }
 
-    public setHourValue( hours: number ): void {
+    public setHourValue( hours: number ): void {  
+
         const m = this.dateTimeAdapter.setHours(this.pickerMoment, hours);
         this.selectedChange.emit(m);
     }
@@ -238,54 +239,6 @@ export class OwlTimerComponent<T> implements OnInit {
         }
 
         event.preventDefault();
-    }
-
-    /**
-     * Check if the up hour button is enabled
-     * @return {boolean}
-     * */
-    public upHourEnabled(): boolean {
-        return !this.maxDateTime || this.compareHours(this.stepHour, this.maxDateTime) < 1;
-    }
-
-    /**
-     * Check if the down hour button is enabled
-     * @return {boolean}
-     * */
-    public downHourEnabled(): boolean {
-        return !this.minDateTime || this.compareHours(-this.stepHour, this.minDateTime) > -1;
-    }
-
-    /**
-     * Check if the up minute button is enabled
-     * @return {boolean}
-     * */
-    public upMinuteEnabled(): boolean {
-        return !this.maxDateTime || this.compareMinutes(this.stepMinute, this.maxDateTime) < 1;
-    }
-
-    /**
-     * Check if the down minute button is enabled
-     * @return {boolean}
-     * */
-    public downMinuteEnabled(): boolean {
-        return !this.minDateTime || this.compareMinutes(-this.stepMinute, this.minDateTime) > -1;
-    }
-
-    /**
-     * Check if the up second button is enabled
-     * @return {boolean}
-     * */
-    public upSecondEnabled(): boolean {
-        return !this.maxDateTime || this.compareSeconds(this.stepSecond, this.maxDateTime) < 1;
-    }
-
-    /**
-     * Check if the down second button is enabled
-     * @return {boolean}
-     * */
-    public downSecondEnabled(): boolean {
-        return !this.minDateTime || this.compareSeconds(-this.stepSecond, this.minDateTime) > -1;
     }
 
     /**
