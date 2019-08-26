@@ -477,7 +477,11 @@ export class OwlDateTimeComponent<T> extends OwlDateTime<T> implements OnInit, O
             .withFallbackPosition(
                 {originX: 'start', originY: 'center'},
                 {overlayX: 'start', overlayY: 'center'}
-            );
+            )
+            .withFallbackPosition(
+                {originX: 'end', originY: 'center'},
+                {overlayX: 'end', overlayY: 'center'}
+            )
     }
 
     /**
